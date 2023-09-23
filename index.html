@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>年龄计算器</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f2f2f2;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    label {
+      display: inline-block;
+      margin-top: 20px;
+      margin-right: 10px;
+      font-size: 18px;
+      color: #666;
+      text-align: left;
+    }
+
+    input[type="date"] {
+      padding: 6px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      width: 160px;
+      box-sizing: border-box;
+      text-align: center;
+    }
+
+    input[type="radio"] {
+      margin-right: 10px;
+      vertical-align: middle;
+      transform: scale(2);
+    }
+
+    button {
+      margin-top: 40px; /* 调整按钮的上边距 */
+      padding: 10px 20px;
+      font-size: 18px;
+      color: #fff;
+      background-color: #007bff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    p {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #333;
+      font-weight: bold;
+      color: red;
+      font-size: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>年龄计算器</h1>
+  <label for="birthdate">请输入您的出生日期：</label>
+  <br />
+  <input type="date" id="birthdate" value="2000-01-01" />
+  <br />
+  <label for="gender">请选择您的性别：</label>
+  <br />
+  <div id="gender">
+    <label for="male">
+      <input type="radio" name="gender" id="male" value="male" />
+      男性
+    </label>
+    <label for="female">
+      <input type="radio" name="gender" id="female" value="female" checked/>
+      女性
+    </label>
+  </div>
+  <br />
+  <button onclick="calculateAge()">计算年龄</button>
+  <br />
+  <p id="result"></p >
+
+  <script>
+    function calculateAge() {
+      var birthdate = document.getElementById("birthdate").value;
+      var today = new Date();
+      var birthdateObj = new Date(birthdate);
+      var age = today.getFullYear() - birthdateObj.getFullYear();
+      var monthDiff = today.getMonth() - birthdateObj.getMonth();
+      if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthdateObj.getDate())) {
+        age--;
+      }
+
+      var gender = document.querySelector('input[name="gender"]:checked').value;
+      var genderText = (gender === "male") ? "男性" : "女性";
+      if(gender === "female" && age >18 )
+      {
+	document.getElementById("result").innerHTML = "你是18岁的小仙女！！！";
+      }
+      else    {
+	      document.getElementById("result").innerHTML = "您的年龄是：" + age + " 岁，性别是：" + genderText;
+	}
+    }
+  </script>
+</body>
+</html>
